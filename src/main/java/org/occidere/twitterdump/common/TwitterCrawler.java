@@ -39,7 +39,7 @@ public class TwitterCrawler {
 	private static final String DATE_FORMAT = "yyyyMMddHHmmss";
 
 	@Value("${chromedriver.path}")
-	private String chromedriverPath;
+	private String chromedriverPath = "/Users/occidere/Downloads/chromedriver";
 	@Setter
 	private int range;
 	@Setter
@@ -150,4 +150,13 @@ public class TwitterCrawler {
 			errorLog.error("ScrollDownError", e);
 		}
 	}
+	public static void main(String[] args) {
+		TwitterCrawler crawler = new TwitterCrawler() {{
+			setUrl("https://twitter.com/official_izone/media");
+			setRange(15);
+		}};
+		crawler.getResult().forEach(System.out::println);
+	}
  }
+
+

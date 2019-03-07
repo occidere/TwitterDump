@@ -27,7 +27,7 @@
 
 
 	<!-- 기본으로 적용되는 설정 -->
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="console"/>
 	</root>
 

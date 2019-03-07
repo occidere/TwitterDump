@@ -66,6 +66,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 	public TwitterCrawler twitterCrawler(
 			@Value("#{jobParameters[url]}") String url,
 			@Value("#{jobParameters[dateRange] == null ? 1 : jobParameters[dateRange]}") int dateRange) {
+		System.out.println("dateRange: " + dateRange);
 		TwitterCrawler crawler = new TwitterCrawler();
 		crawler.setUrl(url);
 		crawler.setRange(dateRange);
