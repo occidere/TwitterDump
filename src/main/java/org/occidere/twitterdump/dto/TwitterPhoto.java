@@ -1,6 +1,7 @@
 package org.occidere.twitterdump.dto;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -24,10 +25,20 @@ public class TwitterPhoto  implements Serializable {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
 	@Id
-	@Field("pageUrl")
+	private String id;
+	public void setId(String id) {
+		// /official_izone/status/1103685850502651904/ -> /official_izone/status/1103685850502651904
+		if (StringUtils.endsWith(id, "/")) {
+			id = id.substring(0, id.length() -1 );
+		}
+		// 1103685850502651904
+		this.id = StringUtils.substringAfterLast(id, "/");
+	}
+
 	private String pageUrl;
 	public void setPageUrl(String pageUrl) {
 		this.pageUrl = pageUrl;
+		setId(pageUrl);
 	}
 
 	private String date; // yyyyMMddHHmmss
